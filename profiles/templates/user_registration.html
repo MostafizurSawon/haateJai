@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>Register Page | JokesHub</title>
+{% endblock %} 
+
+{% block content %}
+  <div class="container">
+    <h1 class="w-50 mx-auto text-center p-3 border-bottom border-top border-info mt-5"><i class="fa-solid fa-user-plus me-2"></i>Register your account Here</h1>
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6 p-4">  
+            <form class="mx-auto mt-5 p-5 shadow" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                {% comment %} <div class="d-grid gap-2 mt-4">
+                    <button class="reg-button my-2 py-2">
+                      <i class="fa-solid fa-user-secret"></i>
+                      Register</button>
+                </div> {% endcomment %}
+                <div class="button">
+                  <button class="btn">
+                    {% comment %} <i class="fa-solid fa-user-secret"></i>  {% endcomment %}
+                    Register</button>
+                </div>
+                <small>Already have an account? Login <a class="text-success" href="{% url 'login' %}">here</a></small>
+                
+              </form>
+        </div>
+        <div class="col-md-6">
+          <img class="w-100" src="https://img.freepik.com/free-vector/sign-up-concept-illustration_114360-7895.jpg" alt="" />
+        </div>
+      </div>
+  </div>
+{% endblock %}

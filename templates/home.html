@@ -1,0 +1,547 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="height: 100vh;" class="w-100 mb-4 d-flex justify-content-center">
+    <div class="row container-fluid d-flex justify-content-center">
+        <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <div>
+                <h1>Welcome to <i class="fa-regular fa-circle-right"></i> <span class="text-info">JokesHub</span></h1>
+                <p class="mb-5">
+                  A joke is a display of humour in which words are used within a specific and well-defined narrative structure to make people laugh and is usually not meant to be interpreted literally. It usually takes the form of a story, often with dialogue, and ends in a punch line, whereby the humorous element of the story is revealed; this can be done using a pun or other type of word play, irony or sarcasm, logical incompatibility, hyperbole, or other means. Linguist Robert Hetzron offers the definition:
+                  <br>
+                  A joke is a short humorous piece of oral literature in which the funniness culminates in the final sentence, called the punchline… In fact, the main condition is that the tension should reach its highest level at the very end. No continuation relieving the tension should be added. 
+                  </p>
+                  {% comment %} <a style="--clr:#ADFF2F" class="button reg" href="{% url 'about' %}"><span>About Us</span><i></i></a> {% endcomment %}
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+          <img src="https://wallpapers.com/images/high/batman-the-killing-joke-1920-x-1080-wallpaper-8nzvbdjgk12c08sr.webp" class="d-block w-100" alt="...">
+        </div>
+    </div>
+</div>
+
+
+
+{% comment %} <div>
+    {% include 'show_jokes.html' with jokes=jokes %}
+</div> {% endcomment %}
+
+<div class="container my-5">
+  <h2 class="text-center pb-2 border-bottom border-info my-4">Todays best photo for our jokes lovers!</h2>
+
+  <!-- Gallery -->
+<div class="row shadow pt-4">
+  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 ">
+    <img
+      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+      class="w-100 shadow-1-strong rounded mb-4"
+      alt="Boat on Calm Water"
+    />
+
+    <img
+      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
+      class="w-100 shadow-1-strong rounded mb-4"
+      alt="Wintry Mountain Landscape"
+    />
+  </div>
+
+  <div class="col-lg-4 mb-4 mb-lg-0">
+    <img
+      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
+      class="w-100 shadow-1-strong rounded mb-4"
+      alt="Mountains in the Clouds"
+    />
+
+    <img
+      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
+      class="w-100 shadow-1-strong rounded mb-4"
+      alt="Boat on Calm Water"
+    />
+  </div>
+
+  <div class="col-lg-4 mb-4 mb-lg-0">
+    <img
+      src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
+      class="w-100 shadow-1-strong rounded mb-4"
+      alt="Waves at Sea"
+    />
+
+    <img
+      src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
+      class="w-100 shadow-1-strong rounded mb-4"
+      alt="Yosemite National Park"
+    />
+  </div>
+</div>
+<!-- Gallery -->
+
+
+<!-- Table 2 - Bootstrap Brain Component -->
+
+{% comment %} <div class="container mt-5">
+  <button type="button" class="btn btn-primary" id="showToast">Show Toast</button>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="myToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+          <strong class="me-auto">Bootstrap Toast</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+          Hello, this is a Bootstrap toast example!
+      </div>
+  </div>
+</div> {% endcomment %}
+
+
+<p class="d-inline-flex gap-1 mt-4">
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Click to Load an advertisement
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <section class="py-3 py-md-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <div class="card widget-card border-light shadow-sm">
+              <div class="card-body p-4">
+                <h5 class="card-title widget-card-title mb-4">Marketing Campaigns</h5>
+                <div class="table-responsive">
+                  <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0">
+                    <thead>
+                      <tr>
+                        <th>Campaign</th>
+                        <th>Client</th>
+                        <th>Project</th>
+                        <th>Status</th>
+                        <th>Budget</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="fs-6 bsb-w-35 bsb-h-35 text-bg-primary rounded-circle d-flex align-items-center justify-content-center me-2">
+                              <i class="bi bi-twitter-x"></i>
+                            </span>
+                            <div>
+                              <h6 class="m-0">Twitter</h6>
+                              <span class="text-secondary fs-7">SMM</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">Oliver</h6>
+                          <span class="text-secondary fs-7">United States</span>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">Bootstrap</h6>
+                          <span class="text-secondary fs-7">v5.3+</span>
+                        </td>
+                        <td>
+                          <span class="badge bg-danger bsb-w-85">Pending</span>
+                        </td>
+                        <td>$495</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="fs-6 bsb-w-35 bsb-h-35 text-bg-success rounded-circle d-flex align-items-center justify-content-center me-2">
+                              <i class="bi bi-facebook"></i>
+                            </span>
+                            <div>
+                              <h6 class="m-0">Facebook</h6>
+                              <span class="text-secondary fs-7">PPC</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">Emma</h6>
+                          <span class="text-secondary fs-7">United Kingdom</span>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">WordPress</h6>
+                          <span class="text-secondary fs-7">v6.3+</span>
+                        </td>
+                        <td>
+                          <span class="badge bg-success bsb-w-85">Paid</span>
+                        </td>
+                        <td>$950</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="fs-6 bsb-w-35 bsb-h-35 text-bg-danger rounded-circle d-flex align-items-center justify-content-center me-2">
+                              <i class="bi bi-github"></i>
+                            </span>
+                            <div>
+                              <h6 class="m-0">Github</h6>
+                              <span class="text-secondary fs-7">PPC</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">Isabella</h6>
+                          <span class="text-secondary fs-7">Canada</span>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">React</h6>
+                          <span class="text-secondary fs-7">v18+</span>
+                        </td>
+                        <td>
+                          <span class="badge bg-info bsb-w-85">Paused</span>
+                        </td>
+                        <td>$700</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="fs-6 bsb-w-35 bsb-h-35 bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                              <i class="bi bi-youtube"></i>
+                            </span>
+                            <div>
+                              <h6 class="m-0">YouTube</h6>
+                              <span class="text-secondary fs-7">SMM</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">William</h6>
+                          <span class="text-secondary fs-7">UAE</span>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">Vue</h6>
+                          <span class="text-secondary fs-7">v3+</span>
+                        </td>
+                        <td>
+                          <span class="badge bg-warning bsb-w-85">Active</span>
+                        </td>
+                        <td>$875</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="fs-6 bsb-w-35 bsb-h-35 bg-warning text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                              <i class="bi bi-google"></i>
+                            </span>
+                            <div>
+                              <h6 class="m-0">Google</h6>
+                              <span class="text-secondary fs-7">SEM</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">Preston</h6>
+                          <span class="text-secondary fs-7">Australia</span>
+                        </td>
+                        <td>
+                          <h6 class="mb-1">Svelte</h6>
+                          <span class="text-secondary fs-7">v4+</span>
+                        </td>
+                        <td>
+                          <span class="badge bg-primary bsb-w-85">Closed</span>
+                        </td>
+                        <td>$1230</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+
+
+
+
+</div>
+
+
+
+{% comment %} <div class="row">
+  <div class="col-md-6"><!-- Map 2 - Bootstrap Brain Component -->
+    <section class="py-3 py-md-5">
+      <div class="">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <div class="card widget-card border-light shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
+                  <div class="mb-2 mb-sm-0">
+                    <h5 class="card-title widget-card-title m-0">Global Visitors</h5>
+                  </div>
+                  <div>
+                    <span class="text-secondary fs-7">Last updated: 1 days ago</span>
+                  </div>
+                </div>
+                <div id="bsb-map-2" class="bsb-jvm-zoom-btn"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section></div>
+  <div class="col-md-6">
+    <!-- Map 3 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5">
+  <div class="">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9 col-xl-8">
+        <div class="card widget-card border-light shadow-sm">
+          <div class="card-body p-4">
+            <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
+              <div class="mb-2 mb-sm-0">
+                <h5 class="card-title widget-card-title m-0">Global Visitors</h5>
+              </div>
+              <div>
+                <span class="text-secondary fs-7">Last updated: 7 days ago</span>
+              </div>
+            </div>
+            <div id="bsb-map-3" class="bsb-jvm-zoom-btn"></div>
+            <div class="card mt-5 border-0 bg-primary">
+              <div class="card-body">
+                <div class="row gy-3 gy-sm-4">
+                  <div class="col-12 col-sm-6">
+                    <div class="card border-0">
+                      <div class="card-body">
+                        <h6 class="mb-3">United States</h6>
+                        <div class="progress" role="progressbar" aria-label="United States Visitors" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                          <div class="progress-bar bg-primary" style="width: 33%">33%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <div class="card border-0">
+                      <div class="card-body">
+                        <h6 class="mb-3">Brazil</h6>
+                        <div class="progress" role="progressbar" aria-label="Brazil Visitors" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                          <div class="progress-bar bg-success" style="width: 17%">17%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <div class="card border-0">
+                      <div class="card-body">
+                        <h6 class="mb-3">Russia</h6>
+                        <div class="progress" role="progressbar" aria-label="Australia Visitors" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                          <div class="progress-bar bg-danger" style="width: 19%">19%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <div class="card border-0">
+                      <div class="card-body">
+                        <h6 class="mb-3">Australia</h6>
+                        <div class="progress" role="progressbar" aria-label="Australia Visitors" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                          <div class="progress-bar bg-info" style="width: 31%">31%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </div>
+</div> {% endcomment %}
+
+{% comment %} subscribe {% endcomment %}
+<!-- Pricing 3 - Bootstrap Brain Component -->
+<section class="bsb-pricing-3 py-5 py-xl-8">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+        <h3 class="fs-5 mb-2 text-secondary text-center text-uppercase">Our Pricing</h3>
+        <h2 class="display-5 mb-5 mb-xl-9 text-center">Join to our premium subscription feature to get more!</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="container-fluid bg-light border pb-4 mt-md-6 shadow">
+          <div class="row">
+            <div class="col-12 col-md-4">
+              <div class="card border-0 bg-transparent">
+                <div class="card-body p-4 p-xxl-5">
+                  <h2 class="h4 mb-2">Starter</h2>
+                  <p class="text-secondary m-0">Scale as you go from</p>
+                  <hr class="my-4 border-dark-subtle">
+                  <h4 class="display-3 fw-bold text-primary m-0">$45</h4>
+                  <p class="text-secondary m-0">USD / Month</p>
+                  <div class="d-grid gap-2 my-4">
+                    <a href="#!" class="btn btn-lg btn-outline-primary">Choose Plan</a>
+                  </div>
+                  <ul class="list-group list-group-flush m-0">
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>25</strong> Jokes</span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>Boost</strong> Profile</span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>30 GB</strong> Image Hosting</span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      <span>Free <strong>Notification mail</strong></span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      <span>Free <strong>Support</strong></span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      <span><strong>Weekly</strong> Report Card</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="card bg-white border-0 border-top pt-md-6 shadow-sm bsb-pricing-popular">
+                <div class="card-body position-relative p-4 p-xxl-5">
+                  <span class="badge text-bg-warning position-absolute top-0 start-50 translate-middle">Most Popular</span>
+                  <h2 class="h4 mb-2">Pro</h2>
+                  <p class="text-secondary m-0">30-day money back gurantee</p>
+                  <hr class="my-4 border-dark-subtle">
+                  <h4 class="display-3 fw-bold text-primary m-0">$75</h4>
+                  <p class="text-secondary m-0">USD / Month</p>
+                  <div class="d-grid gap-2 my-4">
+                    <a href="#!" class="btn btn-lg btn-primary">Choose Plan</a>
+                  </div>
+                  <ul class="list-group list-group-flush m-0">
+                    <li class="list-group-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>50</strong> Daily Jokes</span>
+                    </li>
+                    <li class="list-group-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>Boost</strong> Profile</span>
+                    </li>
+                    <li class="list-group-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>50 GB</strong> Image hosting</span>
+                    </li>
+                    <li class="list-group-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span>Free <strong>Themes</strong></span>
+                    </li>
+                    <li class="list-group-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span>Free <strong>Support</strong></span>
+                    </li>
+                    <li class="list-group-item">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x text-danger" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                      </svg>
+                      <span><strong>Weekly</strong> Report card</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4">
+              <div class="card border-0 bg-transparent">
+                <div class="card-body p-4 p-xxl-5">
+                  <h2 class="h4 mb-2">Business</h2>
+                  <p class="text-secondary m-0">Free trial is available</p>
+                  <hr class="my-4 border-dark-subtle">
+                  <h4 class="display-3 fw-bold text-primary m-0">$125</h4>
+                  <p class="text-secondary m-0">USD / Month</p>
+                  <div class="d-grid gap-2 my-4">
+                    <a href="#!" class="btn btn-lg btn-outline-primary">Choose Plan</a>
+                  </div>
+                  <ul class="list-group list-group-flush m-0">
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>100</strong> Daily jokes</span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>Free</strong> Profile boost</span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>100 GB</strong> Image hosting</span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span>Custom <strong>Theme and edit feature</strong></span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span>Free <strong>Support</strong></span>
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                      </svg>
+                      <span><strong>Weekly</strong> Report Card</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock content %}
