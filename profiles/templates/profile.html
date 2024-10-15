@@ -1,175 +1,749 @@
 {% extends 'base.html' %}
+{% load static %}
 {%  load crispy_forms_tags %}
 {% block title %}
-<title>User Profile | JokesHub</title>
+<title>User Profile | Haate Jai</title>
 {% endblock %} 
+
+{% block navbar %}
+
+  {% include 'navbar2.html' %}
+
+{% endblock navbar %}
+
+
 {% block content %} 
 
-<div class="container shadow mt-5 py-3">
-  <div class="row mx-auto my-3 d-flex justify-content-center align-items-center">
-    <div class="col-md-2 d-flex justify-content-center align-items-center">
-      <img class="rounded-circle w-50" src="https://img.freepik.com/premium-photo/fun-asian-teenager_183364-45575.jpg" alt="" />
-    </div>
-    <div class="col-md-6">
-      <h4>@{{user.username}} </h4>
-      {% if user_profile.points %}
-      <h6>Points Earned: <span class="text-success">{{user_profile.points}}</span></h6>
-      {% endif %}
-      <h2 class="">Full Name: {{ user.first_name }} {{ user.last_name }} <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="mb-2 bi bi-patch-check fw-bold text-primary" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
-        <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911z"/>
-      </svg></h2>
-      <h4 class="">Email: {{ user.email }}</h4>
-  
-      <div class="d-flex align-items-center mb-2">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar text-muted" viewBox="0 0 16 16">
-          <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-        </svg>
-        <small class="ms-1 text-muted">Member since: {{ user.date_joined }}</small>
-      </div>
-      <div class="d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history text-muted" viewBox="0 0 16 16">
-          <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
-          <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
-          <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
-        </svg>
-        <small class="ms-1 text-muted">Last logged in: {{ user.last_login }}</small>
-      </div>
-      
-    </div>
-    <div class="col-md-4">
-      <div class="d-flex justify-content-center align-items-center">
-        <img class="img-fluid" src="https://img.freepik.com/free-vector/man-using-face-mask-smartphone-illustration-designs_24877-63608.jpg" alt="">
+
+
+<!-- Header -->
+
+
+
+
+
+
+
+<section class="bg-light py-3 py-md-5 py-xl-8">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+        <h2 class="mb-4 display-5 text-center">{{data.user.username}}'s Profile</h2>
+        <p class="text-secondary text-center lead fs-4 mb-5">This Profile page is your digital hub, where you can find all your profile informations.</p>
+        
+        {% comment %} <a href="{% url 'update_task' task.pk %}">hi</a> {% endcomment %}
+        <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
       </div>
     </div>
   </div>
-</div>
+
+  <div class="container">
+    <div class="row gy-4 gy-lg-0">
+      <div class="col-12 col-lg-4 col-xl-3">
+        <div class="row gy-4">
+          <div class="col-12">
+            <div class="card widget-card border-light shadow-sm">
+              <div class="card-header text-bg-primary">Welcome, {{data.user.username}}</div>
+              <div class="card-body">
+                <div class="text-center mb-3">
+                  <img src="{{data.image}}" class="img-fluid rounded-circle"  alt="{{data.user.username}}" />
+                </div>
+                <h5 class="text-center mb-1">{{data.user.first_name}} {{data.user.last_name}}</h5>
+                <p class="text-center text-secondary mb-4">{{data.position}}</p>
+                <p class="text-center text-secondary mb-4">Total Points: {{data.points}}</p>
+                
+                <ul class="list-group list-group-flush mb-4">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h6 class="m-0">Total Posts</h6>
+                    <span>{{all}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h6 class="m-0">Pending tasks</h6>
+                    <span>{{pending}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h6 class="m-0">Completed Tasks</h6>
+                    <span>{{complete}}</span>
+                  </li>
+                </ul>
+                {% comment %} <div class="d-grid m-0">
+                  <button class="btn btn-outline-primary" type="button">Follow</button>
+                </div> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card widget-card border-light shadow-sm">
+              <div class="card-header text-bg-primary">Social Accounts</div>
+              <div class="card-body">
+                <a href="{{social.youtube}}" class="d-inline-block bg-dark link-light lh-1 p-2 rounded" data-bs-toggle="tooltip" title="YouTube">
+                  <i class="bi bi-youtube"></i>
+                </a>
+                <a href="{{social.x}}" class="d-inline-block bg-dark link-light lh-1 p-2 rounded" data-bs-toggle="tooltip" title="X">
+                  <i class="bi bi-twitter-x"></i>
+                </a>
+                <a href="{{social.facebook}}" class="d-inline-block bg-dark link-light lh-1 p-2 rounded" data-bs-toggle="tooltip" title="FaceBook">
+                  <i class="bi bi-facebook"></i>
+                </a>
+                <a href="{{social.linkedin}}" class="d-inline-block bg-dark link-light lh-1 p-2 rounded" data-bs-toggle="tooltip" title="LinkedIn">
+                  <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="{{social.portfolio}}" class="d-inline-block bg-dark link-light lh-1 p-2 rounded" data-bs-toggle="tooltip" title="Portfolio">
+                  <i class="bi bi-person-bounding-box"></i>
+                </a> 
+                <a href="{{social.github}}" class="d-inline-block bg-dark link-light lh-1 p-2 rounded" data-bs-toggle="tooltip" title="Github">
+                  <i class="bi bi-github"></i>
+                </a> <br /> <br>
+                {% comment %} <a href="{% url 'add_social' %}" class="">
+                  Add Social Account Links
+                </a> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card widget-card border-light shadow-sm">
+              <div class="card-header text-bg-primary">About Me</div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush mb-0">
+                  <li class="list-group-item">
+                    <h6 class="mb-1">
+                      <span class="bii bi-mortarboard-fill me-2"></span>
+                      Education
+                    </h6>
+                    <span>{{edu.last_education}}</span>
+                  </li>
+                  <li class="list-group-item">
+                    <h6 class="mb-1">
+                      <span class="bii bi-geo-alt-fill me-2"></span>
+                      {{data.country}}
+                    </h6>
+                    <span>{{data.address}}</span>
+                  </li>
+                  <li class="list-group-item">
+                    <h6 class="mb-1">
+                      <span class="bii bi-building-fill-gear me-2"></span>
+                      Company
+                    </h6>
+                    <span>{{data.company}}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card widget-card border-light shadow-sm">
+              <div class="card-header text-bg-primary">Skills</div>
+              <div class="card-body">
+                Coming soon
+                <img class="img-fluid" src="https://giffiles.alphacoders.com/221/221781.gif" alt="">
+                {% comment %} <span class="badge text-bg-primary">HTML</span>
+                <span class="badge text-bg-primary">SCSS</span>
+                <span class="badge text-bg-primary">Javascript</span>
+                <span class="badge text-bg-primary">React</span>
+                <span class="badge text-bg-primary">Vue</span>
+                <span class="badge text-bg-primary">Angular</span>
+                <span class="badge text-bg-primary">UI</span>
+                <span class="badge text-bg-primary">UX</span> {% endcomment %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-8 col-xl-9">
+        <div class="card widget-card border-light shadow-sm">
+          <div class="card-body p-4">
+            <ul class="nav nav-tabs" id="profileTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="about-tab" data-bs-toggle="tab" data-bs-target="#about-tab-pane" type="button" role="tab" aria-controls="about-tab-pane" aria-selected="false">About</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email-tab-pane" type="button" role="tab" aria-controls="email-tab-pane" aria-selected="false">Emails</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password-tab-pane" type="button" role="tab" aria-controls="password-tab-pane" aria-selected="false">Password</button>
+              </li>
+            </ul>
+            <div class="tab-content pt-4" id="profileTabContent">
+              <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
+                {% comment %} <a class="dropdown-item" href="{% url 'profile_info' %}">Update data</a> {% endcomment %}
+
+                <h5 class="mb-3">Your all Tasks</h5>
+                
+                {% comment %} <a class="me-3" href="{% url 'add_task' %}"><button type="button" class="btn btn-outline-success">Add a Task</button></a>{% endcomment %}
+                {% comment %} <a href="{% url 'add_task_category' %}"><button type="button" class="btn btn-outline-primary">Add a Skill</button></a> {% endcomment %} 
+                <br/> <br/>
+                
+                <div class="btn-group gap-3" role="group" aria-label="Basic mixed styles example">
+                  <a href="/profile/?complete=0"><button type="button" class="btn btn-danger">Pending</button></a>
+                  <a href="/profile/"><button type="button" class="btn btn-warning">All Tasks</button></a>
+                  <a href="/profile/?complete=1"><button type="button" class="btn btn-success">Completed Tasks</button></a>
+                </div>
+
+                
+                <div class="my-3 p-3 row gap-4">
+                  
+                  {% for t in tasks %}
+                  <div class="col-md-12">
+                    <div class="card">
+                      {% comment %} User: {{t.user.username}} {% endcomment %}
+                      <div class="card-body">
+                        {% if t.complete %}
+                          <h5 class="card-title">Status: <span class="text-success">Completed</span></h5>
+                        {% else %}
+                          <h5 class="card-title">Status: <span class="text-danger">Pending</span></h5>
+                        {% endif %}
+                        <p class="card-text">
+                          Topics: {{t.topics}}
+                        </p>
+                        <h4 class="card-text">            
+                          Skills: 
+                          {% if t.skill_category.all %}
+                            
+                              {% for skill in t.skill_category.all %}
+                                <button type="button" class="btn btn-primary btn-sm" disabled>{{ skill.skill }}</button> 
+                              {% endfor %}
+                            
+                          {% else %}
+                            No skills assigned.
+                          {% endif %}</h4>
+
+                        <h6 class="text-success">Created at: {{t.created_at}}</h6>
+                        <h6 class="text-danger">Pending Date: {{t.pending_date}}</h6>
+                      </div>
+                      <div class="card-footer d-flex justify-content-between">
+
+                        {% if not t.complete %}
+                          <a href="{% url 'update_task' t.pk %}">
+                            <button type="button" class="btn btn-outline-success px-5">Edit</button>
+                          </a>
+                        {% else %}
+                          <button type="button" class="btn btn-outline-success px-5" disabled>Edit</button>
+                        {% endif %}
+
+                        <button type="button" class="btn btn-outline-danger px-5" disabled>Delete</button>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                    
+                  {% endfor %}
+
+                </div>
+
+                
+
+                
+              </div>
+              <div class="tab-pane fade" id="about-tab-pane" role="tabpanel" aria-labelledby="about-tab" tabindex="0">
+                
+                
+                <p class="lead mb-3">{{data.description}}</p>
+
+                <h5 class="mb-3">Profile</h5>
+                <div class="row g-0">
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">First Name</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.user.first_name}}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Last Name</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.user.last_name}}</div>
+                  </div>
+
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2"><div class="d-flex align-items-center mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history text-muted me-2" viewBox="0 0 16 16">
+                        <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.276-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432z"/>
+                        <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0z"/>
+                        <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5"/>
+                      </svg>
+                      Last Login
+                    </div></div>
+                  </div>
+
+                  
+                  
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{ user.last_login }}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2"><div class="d-flex align-items-center mb-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar text-muted me-2" viewBox="0 0 16 16">
+                        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
+                      </svg>
+                      Member since
+                    </div></div>
+                  </div>
+
+                  
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{ user.date_joined }}</div>
+                  </div>
+
+                  
+              
+                  
+                  
+
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Education</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{edu.last_education}}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Address</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.address}}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Country</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.country}}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Job</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.job}}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Company</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.company}}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Phone</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.mobile}}</div>
+                  </div>
+                  <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                    <div class="p-2">Email</div>
+                  </div>
+                  <div class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                    <div class="p-2">{{data.user.email}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <form action="#!" class="row gy-3 gy-xxl-4">
+                  <div class="col-12">
+                    <div class="row gy-2">
+                      <label class="col-12 form-label m-0">Profile Image</label>
+                      <div class="col-12">
+                        <img src="{{data.image}}" class="img-fluid" alt="{{data.user.username}}" height="600px" width="400px">
+                      </div>
+                      <div class="col-12">
+                        <a href="#!" class="d-inline-block bg-primary link-light lh-1 p-2 rounded">
+                          <i class="bi bi-upload"></i>
+                        </a>
+                        <a href="#!" class="d-inline-block bg-danger link-light lh-1 p-2 rounded">
+                          <i class="bi bi-trash"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputFirstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="inputFirstName" value="{{data.user.first_name}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputLastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="inputLastName" value="{{data.user.last_name}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputEducation" class="form-label">Education</label>
+                    <input type="text" class="form-control" id="inputEducation" value="{{edu.last_education}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputSkills" class="form-label">Skills</label>
+                    <input type="text" class="form-control" id="inputSkills" value="HTML, SCSS, Javascript, React, Vue, Angular, UI, UX">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputJob" class="form-label">Job</label>
+                    <input type="text" class="form-control" id="inputJob" value="{{data.job}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputCompany" class="form-label">Company</label>
+                    <input type="text" class="form-control" id="inputCompany" value="{{data.company}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputPhone" class="form-label">Phone</label>
+                    <input type="tel" class="form-control" id="inputPhone" value="{{data.mobile}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" value="{{data.user.email}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" value="{{data.address}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputCountry" class="form-label">Country</label>
+                    <select class="form-select" id="inputCountry">
+                      <option value="Afghanistan">Afghanistan</option>
+                      <option value="Åland Islands">Åland Islands</option>
+                      <option value="Albania">Albania</option>
+                      <option value="Algeria">Algeria</option>
+                      <option value="American Samoa">American Samoa</option>
+                      <option value="Andorra">Andorra</option>
+                      <option value="Angola">Angola</option>
+                      <option value="Anguilla">Anguilla</option>
+                      <option value="Antarctica">Antarctica</option>
+                      <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                      <option value="Argentina">Argentina</option>
+                      <option value="Armenia">Armenia</option>
+                      <option value="Aruba">Aruba</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Austria">Austria</option>
+                      <option value="Azerbaijan">Azerbaijan</option>
+                      <option value="Bahamas">Bahamas</option>
+                      <option value="Bahrain">Bahrain</option>
+                      <option value="Bangladesh" selected>Bangladesh</option>
+                      <option value="Barbados">Barbados</option>
+                      <option value="Belarus">Belarus</option>
+                      <option value="Belgium">Belgium</option>
+                      <option value="Belize">Belize</option>
+                      <option value="Benin">Benin</option>
+                      <option value="Bermuda">Bermuda</option>
+                      <option value="Bhutan">Bhutan</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                      <option value="Botswana">Botswana</option>
+                      <option value="Bouvet Island">Bouvet Island</option>
+                      <option value="Brazil">Brazil</option>
+                      <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                      <option value="Brunei Darussalam">Brunei Darussalam</option>
+                      <option value="Bulgaria">Bulgaria</option>
+                      <option value="Burkina Faso">Burkina Faso</option>
+                      <option value="Burundi">Burundi</option>
+                      <option value="Cambodia">Cambodia</option>
+                      <option value="Cameroon">Cameroon</option>
+                      <option value="Canada">Canada</option>
+                      <option value="Cape Verde">Cape Verde</option>
+                      <option value="Cayman Islands">Cayman Islands</option>
+                      <option value="Central African Republic">Central African Republic</option>
+                      <option value="Chad">Chad</option>
+                      <option value="Chile">Chile</option>
+                      <option value="China">China</option>
+                      <option value="Christmas Island">Christmas Island</option>
+                      <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="Comoros">Comoros</option>
+                      <option value="Congo">Congo</option>
+                      <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+                      <option value="Cook Islands">Cook Islands</option>
+                      <option value="Costa Rica">Costa Rica</option>
+                      <option value="Cote D'ivoire">Cote D'ivoire</option>
+                      <option value="Croatia">Croatia</option>
+                      <option value="Cuba">Cuba</option>
+                      <option value="Cyprus">Cyprus</option>
+                      <option value="Czech Republic">Czech Republic</option>
+                      <option value="Denmark">Denmark</option>
+                      <option value="Djibouti">Djibouti</option>
+                      <option value="Dominica">Dominica</option>
+                      <option value="Dominican Republic">Dominican Republic</option>
+                      <option value="Ecuador">Ecuador</option>
+                      <option value="Egypt">Egypt</option>
+                      <option value="El Salvador">El Salvador</option>
+                      <option value="Equatorial Guinea">Equatorial Guinea</option>
+                      <option value="Eritrea">Eritrea</option>
+                      <option value="Estonia">Estonia</option>
+                      <option value="Ethiopia">Ethiopia</option>
+                      <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                      <option value="Faroe Islands">Faroe Islands</option>
+                      <option value="Fiji">Fiji</option>
+                      <option value="Finland">Finland</option>
+                      <option value="France">France</option>
+                      <option value="French Guiana">French Guiana</option>
+                      <option value="French Polynesia">French Polynesia</option>
+                      <option value="French Southern Territories">French Southern Territories</option>
+                      <option value="Gabon">Gabon</option>
+                      <option value="Gambia">Gambia</option>
+                      <option value="Georgia">Georgia</option>
+                      <option value="Germany">Germany</option>
+                      <option value="Ghana">Ghana</option>
+                      <option value="Gibraltar">Gibraltar</option>
+                      <option value="Greece">Greece</option>
+                      <option value="Greenland">Greenland</option>
+                      <option value="Grenada">Grenada</option>
+                      <option value="Guadeloupe">Guadeloupe</option>
+                      <option value="Guam">Guam</option>
+                      <option value="Guatemala">Guatemala</option>
+                      <option value="Guernsey">Guernsey</option>
+                      <option value="Guinea">Guinea</option>
+                      <option value="Guinea-bissau">Guinea-bissau</option>
+                      <option value="Guyana">Guyana</option>
+                      <option value="Haiti">Haiti</option>
+                      <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                      <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                      <option value="Honduras">Honduras</option>
+                      <option value="Hong Kong">Hong Kong</option>
+                      <option value="Hungary">Hungary</option>
+                      <option value="Iceland">Iceland</option>
+                      <option value="India">India</option>
+                      <option value="Indonesia">Indonesia</option>
+                      <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                      <option value="Iraq">Iraq</option>
+                      <option value="Ireland">Ireland</option>
+                      <option value="Isle of Man">Isle of Man</option>
+                      <option value="Israel">Israel</option>
+                      <option value="Italy">Italy</option>
+                      <option value="Jamaica">Jamaica</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Jersey">Jersey</option>
+                      <option value="Jordan">Jordan</option>
+                      <option value="Kazakhstan">Kazakhstan</option>
+                      <option value="Kenya">Kenya</option>
+                      <option value="Kiribati">Kiribati</option>
+                      <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                      <option value="Korea, Republic of">Korea, Republic of</option>
+                      <option value="Kuwait">Kuwait</option>
+                      <option value="Kyrgyzstan">Kyrgyzstan</option>
+                      <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                      <option value="Latvia">Latvia</option>
+                      <option value="Lebanon">Lebanon</option>
+                      <option value="Lesotho">Lesotho</option>
+                      <option value="Liberia">Liberia</option>
+                      <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                      <option value="Liechtenstein">Liechtenstein</option>
+                      <option value="Lithuania">Lithuania</option>
+                      <option value="Luxembourg">Luxembourg</option>
+                      <option value="Macao">Macao</option>
+                      <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+                      <option value="Madagascar">Madagascar</option>
+                      <option value="Malawi">Malawi</option>
+                      <option value="Malaysia">Malaysia</option>
+                      <option value="Maldives">Maldives</option>
+                      <option value="Mali">Mali</option>
+                      <option value="Malta">Malta</option>
+                      <option value="Marshall Islands">Marshall Islands</option>
+                      <option value="Martinique">Martinique</option>
+                      <option value="Mauritania">Mauritania</option>
+                      <option value="Mauritius">Mauritius</option>
+                      <option value="Mayotte">Mayotte</option>
+                      <option value="Mexico">Mexico</option>
+                      <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                      <option value="Moldova, Republic of">Moldova, Republic of</option>
+                      <option value="Monaco">Monaco</option>
+                      <option value="Mongolia">Mongolia</option>
+                      <option value="Montenegro">Montenegro</option>
+                      <option value="Montserrat">Montserrat</option>
+                      <option value="Morocco">Morocco</option>
+                      <option value="Mozambique">Mozambique</option>
+                      <option value="Myanmar">Myanmar</option>
+                      <option value="Namibia">Namibia</option>
+                      <option value="Nauru">Nauru</option>
+                      <option value="Nepal">Nepal</option>
+                      <option value="Netherlands">Netherlands</option>
+                      <option value="Netherlands Antilles">Netherlands Antilles</option>
+                      <option value="New Caledonia">New Caledonia</option>
+                      <option value="New Zealand">New Zealand</option>
+                      <option value="Nicaragua">Nicaragua</option>
+                      <option value="Niger">Niger</option>
+                      <option value="Nigeria">Nigeria</option>
+                      <option value="Niue">Niue</option>
+                      <option value="Norfolk Island">Norfolk Island</option>
+                      <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                      <option value="Norway">Norway</option>
+                      <option value="Oman">Oman</option>
+                      <option value="Pakistan">Pakistan</option>
+                      <option value="Palau">Palau</option>
+                      <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                      <option value="Panama">Panama</option>
+                      <option value="Papua New Guinea">Papua New Guinea</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Peru">Peru</option>
+                      <option value="Philippines">Philippines</option>
+                      <option value="Pitcairn">Pitcairn</option>
+                      <option value="Poland">Poland</option>
+                      <option value="Portugal">Portugal</option>
+                      <option value="Puerto Rico">Puerto Rico</option>
+                      <option value="Qatar">Qatar</option>
+                      <option value="Reunion">Reunion</option>
+                      <option value="Romania">Romania</option>
+                      <option value="Russian Federation">Russian Federation</option>
+                      <option value="Rwanda">Rwanda</option>
+                      <option value="Saint Helena">Saint Helena</option>
+                      <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                      <option value="Saint Lucia">Saint Lucia</option>
+                      <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                      <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                      <option value="Samoa">Samoa</option>
+                      <option value="San Marino">San Marino</option>
+                      <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                      <option value="Saudi Arabia">Saudi Arabia</option>
+                      <option value="Senegal">Senegal</option>
+                      <option value="Serbia">Serbia</option>
+                      <option value="Seychelles">Seychelles</option>
+                      <option value="Sierra Leone">Sierra Leone</option>
+                      <option value="Singapore">Singapore</option>
+                      <option value="Slovakia">Slovakia</option>
+                      <option value="Slovenia">Slovenia</option>
+                      <option value="Solomon Islands">Solomon Islands</option>
+                      <option value="Somalia">Somalia</option>
+                      <option value="South Africa">South Africa</option>
+                      <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
+                      <option value="Spain">Spain</option>
+                      <option value="Sri Lanka">Sri Lanka</option>
+                      <option value="Sudan">Sudan</option>
+                      <option value="Suriname">Suriname</option>
+                      <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                      <option value="Swaziland">Swaziland</option>
+                      <option value="Sweden">Sweden</option>
+                      <option value="Switzerland">Switzerland</option>
+                      <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                      <option value="Taiwan">Taiwan</option>
+                      <option value="Tajikistan">Tajikistan</option>
+                      <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                      <option value="Thailand">Thailand</option>
+                      <option value="Timor-leste">Timor-leste</option>
+                      <option value="Togo">Togo</option>
+                      <option value="Tokelau">Tokelau</option>
+                      <option value="Tonga">Tonga</option>
+                      <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                      <option value="Tunisia">Tunisia</option>
+                      <option value="Turkey">Turkey</option>
+                      <option value="Turkmenistan">Turkmenistan</option>
+                      <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                      <option value="Tuvalu">Tuvalu</option>
+                      <option value="Uganda">Uganda</option>
+                      <option value="Ukraine">Ukraine</option>
+                      <option value="United Arab Emirates">United Arab Emirates</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="United States">United States</option>
+                      <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Uzbekistan">Uzbekistan</option>
+                      <option value="Vanuatu">Vanuatu</option>
+                      <option value="Venezuela">Venezuela</option>
+                      <option value="Viet Nam">Viet Nam</option>
+                      <option value="Virgin Islands, British">Virgin Islands, British</option>
+                      <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                      <option value="Wallis and Futuna">Wallis and Futuna</option>
+                      <option value="Western Sahara">Western Sahara</option>
+                      <option value="Yemen">Yemen</option>
+                      <option value="Zambia">Zambia</option>
+                      <option value="Zimbabwe">Zimbabwe</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputYouTube" class="form-label">YouTube</label>
+                    <input type="text" class="form-control" id="inputYouTube" value="{{social.youtube}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputX" class="form-label">X</label>
+                    <input type="text" class="form-control" id="inputX" value="{{social.x}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputFacebook" class="form-label">Facebook</label>
+                    <input type="text" class="form-control" id="inputFacebook" value="{{social.facebook}}">
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label for="inputLinkedIn" class="form-label">LinkedIn</label>
+                    <input type="text" class="form-control" id="inputLinkedIn" value="{{social.linkedin}}">
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAbout" class="form-label">About</label>
+                    <textarea class="form-control" id="inputAbout">{{data.description}}</textarea>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane fade" id="email-tab-pane" role="tabpanel" aria-labelledby="email-tab" tabindex="0">
+                <form action="#!">
+                  <fieldset class="row gy-3 gy-md-0">
+                    <legend class="col-form-label col-12 col-md-3 col-xl-2">Email Alerts</legend>
+                    <div class="col-12 col-md-9 col-xl-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="emailChange">
+                        <label class="form-check-label" for="emailChange">
+                          Email Changed
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="passwordChange">
+                        <label class="form-check-label" for="passwordChange">
+                          Password Changed
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="weeklyNewsletter">
+                        <label class="form-check-label" for="weeklyNewsletter">
+                          Weekly Newsletter
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="productPromotions">
+                        <label class="form-check-label" for="productPromotions">
+                          Product Promotions
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="row">
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary mt-4">Save Changes</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane fade" id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="0">
+                <form action="#!">
+                  <div class="row gy-3 gy-xxl-4">
+                    <div class="col-12">
+                      <label for="currentPassword" class="form-label">Current Password</label>
+                      <input type="password" class="form-control" id="currentPassword">
+                    </div>
+                    <div class="col-12">
+                      <label for="newPassword" class="form-label">New Password</label>
+                      <input type="password" class="form-control" id="newPassword">
+                    </div>
+                    <div class="col-12">
+                      <label for="confirmPassword" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control" id="confirmPassword">
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
 
 
 {% comment %} user own jokes {% endcomment %}
 
-<div class="container shadow py-2 mt-4">
-  {% if user_jokes|length != 0%}
-<div class="my-5 container-fluid">
-  <h2 class="border-bottom border-info pb-2 text-center">Your have Posted <span class="text-success">{{user_jokes | length}}</span> Jokes. </h1>
-  <div class="row my-4 gy-4 d-flex justify-content-center">
-  {% for joke in user_jokes %}
-      <div class="col-md-12 d-flex justify-content-center w-100">
-        <div style="width: 100vw;" class="card shadow rounded">
-          <div class="card-body">
-            <div class="row mb-2 d-flex align-items-center">
-              <div class="col-md-2 d-flex justify-content-center align-items-center">
-                <img class="rounded-circle w-50" src="https://img.freepik.com/premium-photo/fun-asian-teenager_183364-45575.jpg" alt="" />
-              </div>
-              <div class="col-md-10">
-                <h2 class="text-primary me-3">{{ joke.owner.first_name }} {{ joke.owner.last_name }}</h2>
-
-                <div class="d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar text-muted" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                  </svg>
-                  <small class="ms-1 text-muted">{{ joke.created_on }}</small>
-                </div>
-              </div>
-            </div>
-            <p class="card-text">{{ joke.description }}</p>
-
-            <div class="d-flex mb-3">
-              <strong class="me-2 p-2">Category:</strong>
-              {% for category in joke.categories.all %}
-                <a class="me-4 p-2 shadow rounded bg-light text-decoration-none text-info">{{ category.name }}</a>
-              {% endfor %}
-            </div>
-            <div class="row text-info pe-3">
-              <div class="col-md-4">
-                <p class="text-primary d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up me-2" viewBox="0 0 16 16">
-                    <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2 2 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a10 10 0 0 0-.443.05 9.4 9.4 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a9 9 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.2 2.2 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.9.9 0 0 1-.121.416c-.165.288-.503.56-1.066.56z" />
-                  </svg>
-                  <strong class="me-2">Like:</strong> {{ joke.like }}
-                </p>
-              </div>
-              <div class="col-md-4 ms-auto text-primary d-flex justify-content-center">
-                <p class="d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">
-                    <path d="M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105" />
-                  </svg>
-                  <a href="{% url 'joke_detail' joke.pk %}" class="ms-1 text-decoration-none text-dark">Comment</a>
-                </p>
-              </div>
-            </div>
-
-            {% comment %} <a class="btn btn-outline-primary" href="{% url 'book_detail' pk = book.pk %}">Details</a> {% endcomment %}
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-</div>
 
 
 
-<div class="container shadow py-2 mt-4">
-  {% if shared_jokes|length != 0%}
-<div class="my-5 container-fluid">
-  <h2 class="border-bottom border-info pb-2 text-center">Your have Shared / Liked <span class="text-success">{{shared_jokes | length}}</span> Jokes. </h1>
-  <div class="row my-4 gy-4 d-flex justify-content-center">
-  {% for joke in shared_jokes %}
-      <div class="col-md-12 d-flex justify-content-center w-100">
-        <div style="width: 100vw;" class="card shadow rounded">
-          <div class="card-body">
-            <div class="row mb-2 d-flex align-items-center">
-              <div class="col-md-2 d-flex justify-content-center align-items-center">
-                <img class="rounded-circle w-50" src="https://img.freepik.com/premium-photo/fun-asian-teenager_183364-45575.jpg" alt="" />
-              </div>
-              <div class="col-md-10">
-                <h2 class="text-primary me-3">{{ joke.owner.first_name }} {{ joke.owner.last_name }}</h2>
-
-                <div class="d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar text-muted" viewBox="0 0 16 16">
-                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
-                  </svg>
-                  <small class="ms-1 text-muted">{{ joke.created_on }}</small>
-                </div>
-              </div>
-            </div>
-            <p class="card-text">{{ joke.description }}</p>
-
-            <div class="d-flex mb-3">
-              <strong class="me-2 p-2">Category:</strong>
-              {% for category in joke.categories.all %}
-                <a class="me-4 p-2 shadow rounded bg-light text-decoration-none text-info">{{ category.name }}</a>
-              {% endfor %}
-            </div>
-            <div class="row text-info pe-3">
-              <div class="col-md-4">
-                <p class="text-primary d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up me-2" viewBox="0 0 16 16">
-                    <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23 2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131 1.41C2.685 7.288 2 7.87 2 8.72v4.001c0 .845.682 1.464 1.448 1.545 1.07.114 1.564.415 2.068.723l.048.03c.272.165.578.348.97.484.397.136.861.217 1.466.217h3.5c.937 0 1.599-.477 1.934-1.064a1.86 1.86 0 0 0 .254-.912c0-.152-.023-.312-.077-.464.201-.263.38-.578.488-.901.11-.33.172-.762.004-1.149.069-.13.12-.269.159-.403.077-.27.113-.568.113-.857 0-.288-.036-.585-.113-.856a2 2 0 0 0-.138-.362 1.9 1.9 0 0 0 .234-1.734c-.206-.592-.682-1.1-1.2-1.272-.847-.282-1.803-.276-2.516-.211a10 10 0 0 0-.443.05 9.4 9.4 0 0 0-.062-4.509A1.38 1.38 0 0 0 9.125.111zM11.5 14.721H8c-.51 0-.863-.069-1.14-.164-.281-.097-.506-.228-.776-.393l-.04-.024c-.555-.339-1.198-.731-2.49-.868-.333-.036-.554-.29-.554-.55V8.72c0-.254.226-.543.62-.65 1.095-.3 1.977-.996 2.614-1.708.635-.71 1.064-1.475 1.238-1.978.243-.7.407-1.768.482-2.85.025-.362.36-.594.667-.518l.262.066c.16.04.258.143.288.255a8.34 8.34 0 0 1-.145 4.725.5.5 0 0 0 .595.644l.003-.001.014-.003.058-.014a9 9 0 0 1 1.036-.157c.663-.06 1.457-.054 2.11.164.175.058.45.3.57.65.107.308.087.67-.266 1.022l-.353.353.353.354c.043.043.105.141.154.315.048.167.075.37.075.581 0 .212-.027.414-.075.582-.05.174-.111.272-.154.315l-.353.353.353.354c.047.047.109.177.005.488a2.2 2.2 0 0 1-.505.805l-.353.353.353.354c.006.005.041.05.041.17a.9.9 0 0 1-.121.416c-.165.288-.503.56-1.066.56z" />
-                  </svg>
-                  <strong class="me-2">Like:</strong> {{ joke.like }}
-                </p>
-              </div>
-              <div class="col-md-4 ms-auto text-primary d-flex justify-content-center">
-                <p class="d-flex align-items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 16">
-                    <path d="M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105" />
-                  </svg>
-                  <a href="{% url 'joke_detail' joke.pk %}" class="ms-1 text-decoration-none text-dark">Comment</a>
-                </p>
-              </div>
-            </div>
-
-            {% comment %} <a class="btn btn-outline-primary" href="{% url 'book_detail' pk = book.pk %}">Details</a> {% endcomment %}
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
-{% endif %}
-</div>
 
 {% endblock %}
+
+
+

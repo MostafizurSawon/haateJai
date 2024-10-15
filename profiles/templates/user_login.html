@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block title %}
   <title>Login Page | Haatejai</title>
 {% endblock %}
+
+{% block navbar %}
+{% include 'navbar2.html' %}
+{% endblock navbar %}
+
 {% block content %}
   <div class="container">
     <h1 class="w-50 mx-auto text-center p-3 border-bottom border-top border-info mt-5"><i class="fa-solid fa-right-to-bracket me-2"></i> Login to your account</h1>

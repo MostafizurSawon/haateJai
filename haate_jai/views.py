@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
+
+from products.models import Products
 # from jokes.models import Joke, Category
 
 
@@ -30,14 +32,15 @@ class HomeView(TemplateView):
 #     return render(request, "home.html", {"jokes":jokes, "categories":categories})
 
 def home(request):
-    # jokes = Joke.objects.all()
+    products = Products.objects.all()
+    print("hii",products)
     # if category_slug is not None:
     #     categories = Category.objects.get(slug = category_slug)
     #     jokes = Joke.objects.filter(categories  = categories)
     # categories = Category.objects.all()
     # h_joke = jokes.order_by('-like').first()
     # return render(request, 'home.html', {'jokes' : jokes, 'categories' : categories, 'hjoke' : h_joke})
-    return render(request, 'base.html')
+    return render(request, 'base.html', {'products' : products, 'demo': 'yes got t'})
 
 def about(request):
     return render(request, 'about.html')

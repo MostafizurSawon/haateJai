@@ -17,8 +17,6 @@ from django.utils.encoding import force_bytes
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.models import User
-# from rest_framework.response import Response
-# from rest_framework.authtoken.models import Token
 
 
 class UserRegistrationView(FormView):
@@ -65,9 +63,16 @@ def active(request, uid64, token):
     
 class UserLoginView(LoginView):
     template_name = 'user_login.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect(reverse_lazy('profile'))
+        return super().dispatch(request, *args, **kwargs)
+    
     def get_success_url(self):
-        return reverse_lazy('home')
+        return reverse_lazy('profile')
 
+@login_required
 def user_logout(request):
     logout(request)
     return redirect('login')
@@ -82,16 +87,13 @@ def user_logout(request):
 #         # context['categories'] = Category.objects.all()
 #         return context
 
-# @login_required
-# def profile(request):
-#     user = request.user
-#     # print('profile->',user.email,dir(user))
-#     shared_jokes = Joke.objects.filter(shared_jokes = user)
-#     user_jokes = Joke.objects.filter(owner=user)
-#     # print(user_jokes)
-#     user_profile = UserProfile.objects.filter(user=user).first()
-#     # print(user_profile.points)
-#     return render(request, 'profile.html', { 'shared_jokes' : shared_jokes, 'user' : user, 'user_profile': user_profile, 'user_jokes': user_jokes})
+@login_required(login_url=reverse_lazy('login'))
+def profile(request):
+    user = request.user
+    # user_profile = UserAccount.objects.filter(user=user).first()
+    user_profile = UserAccount.objects.filter(user=user)
+    # print(user_profile.points)
+    return render(request, 'profile.html', {'user_profile': user_profile})
 
 
 

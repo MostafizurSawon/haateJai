@@ -1217,11 +1217,11 @@ Version:1.0
 }
 .hero-slider .single-slider {
 	height: auto;
-	background-image: url('https://via.placeholder.com/1900x700');
+	background-image: url('../images/hero.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-    height: 510px;
+  height: 510px;
 }
 .hero-slider .text-inner {
 	
@@ -1461,7 +1461,7 @@ Version:1.0
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-    height: 510px;
+  height: 510px;
 	margin-top:30px;
 	position:relative;
 }
@@ -1527,7 +1527,9 @@ Version:1.0
 /*======================================
    End Hero Area CSS
 ========================================*/ 
-
+.hero-under{
+	height: 300px;
+}
 /*======================================
    Start Small Banner CSS
 ========================================*/ 

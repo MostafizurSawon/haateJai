@@ -22,8 +22,15 @@
 							<ul class="list-main">
 								<li><i class="ti-location-pin"></i> Store location</li>
 								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-								<li><i class="ti-user"></i> <a href="#">My account</a></li>
-								<li><i class="ti-power-off"></i><a href="login.html#">Login</a></li>
+
+								<li><i class="ti-user"></i> <a href="{% url 'profile' %}">My account</a></li>
+								{% if request.user.is_authenticated %}
+								<li><i class="ti-power-off text-danger"></i><a class="text-danger" href="{% url 'logout' %}">Logout</a></li>
+								
+								{% else %}
+								<li><i class="ti-power-off text-success"></i><a class="text-success" href="{% url 'login' %}">Login</a></li>
+								{% endif %}
+								
 							</ul>
 						</div>
 						<!-- End Top Right -->
