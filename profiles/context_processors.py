@@ -1,4 +1,4 @@
-from .models import UserAccount, UserSocialAccount
+from .models import UserAccount, UserSocialAccount, Cart
 # from Tasks.models import Task
 from django.shortcuts import get_object_or_404
 from django.db import IntegrityError
@@ -21,15 +21,23 @@ def user_data(request):
                 user=request.user
             )
             
-
+            cart, created = Cart.objects.get_or_create(
+                user=user_account
+            )
+            cart_items = cart.products.all()
+            total_price = sum(product.price for product in cart_items)
+            # print(total_price)
+            
+            # print(cart.created_at)
             # Add these objects to the context so they can be used in templates
             return {
                 'data': user_account,
                 'user_social_account': user_social_account,
-                # 'tasks': tasks,
+                'cart': cart,
+                'total': total_price,
             }
 
-        except (UserAccount.DoesNotExist, UserSocialAccount.DoesNotExist):
+        except (UserAccount.DoesNotExist, UserSocialAccount.DoesNotExist, Cart.DoesNotExist):
             # If any of the objects don't exist or creation fails, return an empty context
             return {}
 

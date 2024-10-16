@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import TemplateView
 
 from products.models import Products
+from profiles.models import Cart
 # from jokes.models import Joke, Category
 
 
@@ -33,14 +34,18 @@ class HomeView(TemplateView):
 
 def home(request):
     products = Products.objects.all()
-    print("hii",products)
-    # if category_slug is not None:
-    #     categories = Category.objects.get(slug = category_slug)
-    #     jokes = Joke.objects.filter(categories  = categories)
-    # categories = Category.objects.all()
-    # h_joke = jokes.order_by('-like').first()
-    # return render(request, 'home.html', {'jokes' : jokes, 'categories' : categories, 'hjoke' : h_joke})
-    return render(request, 'base.html', {'products' : products, 'demo': 'yes got t'})
+    # print("hii",products)
+    if request.user.is_authenticated:
+        cart_products = Cart.objects.filter(user__user=request.user).prefetch_related('products').first()
+    else:
+        cart_products = []
+    return render(request, 'base.html', {'products' : products, 'cart_products': cart_products})
+
+# def home(request):
+#     cart_products = Cart.objects.filter(user__user=request.user).prefetch_related('products').first()
+    
+#     return render(request, 'home.html', {'cart_products': cart_products})
+
 
 def about(request):
     return render(request, 'about.html')

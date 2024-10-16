@@ -1,9 +1,9 @@
 {% load static %}
   
   <!-- Header -->
-	<header class="header shop">
+	<header class="header shop w-100">
 		<!-- Topbar -->
-		<div class="topbar">
+		<div class="topbar w-100">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-5 col-md-12 col-12">
@@ -20,7 +20,7 @@
 						<!-- Top Right -->
 						<div class="right-content">
 							<ul class="list-main">
-								<li><i class="ti-location-pin"></i> Store location</li>
+								<li><i class="ti-location-pin"></i> {{data.current_location}}</li> 
 								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
 
 								<li><i class="ti-user"></i> <a href="{% url 'profile' %}">My account</a></li>
@@ -45,7 +45,7 @@
 					<div class="col-lg-2 col-md-2 col-12">
 						<!-- Logo -->
 						<div class="logo">
-							<a href="index.html"><img src="{% static 'images/logo_main.png' %}" alt="logo"></a>
+							<a href="index.html"><img class="w-100" src="{% static 'images/logo_main.png' %}" alt="logo"></a>
 						</div>
 						<!--/ End Logo -->
 						<!-- Search Form -->
@@ -89,33 +89,51 @@
 								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 							</div>
 							<div class="sinlge-bar shopping">
-								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{ cart.products.all|length }}</span></a>
 								<!-- Shopping Item -->
 								<div class="shopping-item">
 									<div class="dropdown-cart-header">
-										<span>2 Items</span>
+										<span>{{ cart.products.all|length }} Items</span>
+
 										<a href="#">View Cart</a>
 									</div>
 									<ul class="shopping-list">
+										{% comment %} <h1>Cart Details</h1>
+										<p>Created at: {{ cart.created_at }}</p>
+										<p>Username: {{ cart.user.user.username }}</p> {% endcomment %}
+										
+										{% comment %} <h2>Products:</h2>
+										{% for product in cart.products.all %}
+										<div class="product-item">
+												<h3>{{ product.name }}</h3>
+												<img src="{{ product.image.url }}" alt="{{ product.name }}">
+												<p>{{ product.description }}</p>
+												<p>Price: ${{ product.price }}</p>
+										</div>
+										{% endfor %} {% endcomment %}
+										{% comment %} ff:{{cart_products.quantity}} {% endcomment %}
+										{% for product in cart.products.all %}
 										<li>
+											<a href="{% url 'remove_from_cart' product.id %}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+											<a class="cart-img" href="#"><img src="{{product.image}}" alt="#"></a>
+											<h4><a href="#">{{product.name}}</a></h4>
+											{% comment %} <h4><a href="{% url 'product_detail' product.id %}">{{product.name}}</a></h4> {% endcomment %}
+											<p class="quantity">1x - <span class="amount">{{product.price}} ৳</span></p>
+										</li>
+										{% endfor %}
+										{% comment %} <li>
 											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
 											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-											<h4><a href="#">Woman Ring</a></h4>
-											<p class="quantity">1x - <span class="amount">$99.00</span></p>
-										</li>
-										<li>
-											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
-											<h4><a href="#">Woman Necklace</a></h4>
-											<p class="quantity">1x - <span class="amount">$35.00</span></p>
-										</li>
+											<h4><a href="#">{{product.description}}</a></h4>
+											<p class="quantity">{{product.quantity}}x - <span class="amount">${{product.price}}</span></p>
+										</li> {% endcomment %}
 									</ul>
 									<div class="bottom">
 										<div class="total">
 											<span>Total</span>
-											<span class="total-amount">$134.00</span>
+											<span class="total-amount">{{total}} ৳</span>
 										</div>
-										<a href="checkout.html" class="btn animate">Checkout</a>
+										<a href="{% url 'checkout' %}" class="btn animate">Checkout</a>
 									</div>
 								</div>
 								<!--/ End Shopping Item -->
@@ -205,7 +223,7 @@
 									<div class="navbar-collapse">	
 										<div class="nav-inner">	
 											<ul class="nav main-menu menu navbar-nav">
-													<li class="active"><a href="#">Home</a></li>
+													<li class="active"><a href="{% url 'home' %}">Home</a></li>
 													<li><a href="#">Product</a></li>												
 													<li><a href="#">Service</a></li>
 													<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>

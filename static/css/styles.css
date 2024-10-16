@@ -148,7 +148,7 @@ Version:1.0
   transform: translate(-50%,-50%);
 }
 .loading{
-	width: 400px;
+	width: 100%;
 }
 /* .preloader-icon {
   width: 100px;
@@ -741,6 +741,7 @@ Version:1.0
 }
 .header.shop .middle-inner {
 	padding: 20px 0;
+	/* max-width: 80%; */
 	background: #fff;
 	border-top: 1px solid #eee;
 }

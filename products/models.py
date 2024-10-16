@@ -19,6 +19,12 @@ class Products(models.Model):
       ('Offer', 'Offer'),
   ]
   
+  LOCATION_CHOICES = [
+      ('Uttara', 'UTTARA'),
+      ('Mirpur', 'MIRPUR'),
+      ('Dhanmondi','DHANMONDI'),
+  ]
+  
   name = models.CharField(max_length=100)
   image = models.URLField(blank=True, null=True)
   description = models.TextField(blank=True, null=True)
@@ -29,6 +35,7 @@ class Products(models.Model):
   category = models.ForeignKey(Category, related_name='product_category', on_delete=models.CASCADE)
   sold = models.IntegerField(blank=True, null=True, default=0)
   available = models.IntegerField(blank=True, null=True)
+  location = models.CharField(max_length=20, blank=True, choices=LOCATION_CHOICES)
   delete = models.BooleanField(default=False)
   user = models.ForeignKey(User, related_name='product_owner', on_delete=models.CASCADE,default=1)
   created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)

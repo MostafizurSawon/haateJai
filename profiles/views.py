@@ -1,5 +1,5 @@
 from django.views.generic import FormView
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect,get_object_or_404, render
 from .forms import UserRegistrationForm
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
@@ -9,7 +9,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 # from jokes.models import Joke
-from . models import UserAccount
+from . models import UserAccount, Cart
+from products.models import Products
 
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -95,5 +96,42 @@ def profile(request):
     # print(user_profile.points)
     return render(request, 'profile.html', {'user_profile': user_profile})
 
+@login_required(login_url=reverse_lazy('login'))
+def checkout(request):
+    return render(request, 'cart.html')
 
+
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Products, id=product_id)
+    user_account = UserAccount.objects.get(user=request.user)
+    
+    cart, created = Cart.objects.get_or_create(user=user_account)
+    
+    quantity = int(request.POST.get('quantity', 1))
+    
+    if cart.products.filter(id=product.id).exists():
+        cart_product = cart.products.get(id=product.id)
+        cart_product.quantity += quantity
+        cart_product.save()
+    else:
+        cart.products.add(product)
+        cart.products.filter(id=product.id).update(quantity=quantity)
+    
+    cart.save()
+    
+    return redirect('home')
+
+@login_required
+def remove_from_cart(request, product_id):
+    product = get_object_or_404(Products, id=product_id)
+    user_account = UserAccount.objects.get(user=request.user)
+    
+    cart, created = Cart.objects.get_or_create(user=user_account)
+    
+    if cart.products.filter(id=product.id).exists():
+        cart.products.remove(product)
+    
+    return redirect('checkout')
 
