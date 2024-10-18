@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 # from jokes.models import Joke
-from . models import UserAccount, Cart
+from . models import CartItem, UserAccount, Cart
 from products.models import Products
 
 from django.contrib.auth.tokens import default_token_generator
@@ -102,26 +102,34 @@ def checkout(request):
 
 
 
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from products.models import Products
+from .models import Cart
+
 @login_required
 def add_to_cart(request, product_id):
     product = get_object_or_404(Products, id=product_id)
-    user_account = UserAccount.objects.get(user=request.user)
-    
-    cart, created = Cart.objects.get_or_create(user=user_account)
-    
-    quantity = int(request.POST.get('quantity', 1))
-    
-    if cart.products.filter(id=product.id).exists():
-        cart_product = cart.products.get(id=product.id)
-        cart_product.quantity += quantity
-        cart_product.save()
+    quantity = int(request.POST.get('quantity', 1))  # Get quantity from POST data
+
+    # Get or create an active cart for the user
+    cart, created = Cart.objects.get_or_create(user=request.user, complete=False)
+
+    # Check if the product is already in the cart
+    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+    if item_created:
+        # If it's a new item, set the initial quantity
+        cart_item.quantity = quantity
     else:
-        cart.products.add(product)
-        cart.products.filter(id=product.id).update(quantity=quantity)
-    
-    cart.save()
-    
+        # If the item already exists, update its quantity
+        cart_item.quantity += quantity
+
+    # Save the cart item
+    cart_item.save()
+
     return redirect('home')
+
 
 @login_required
 def remove_from_cart(request, product_id):

@@ -19,12 +19,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from . views import home
+from . views import home, download_database
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', HomeView.as_view(), name="home"),
     path('', home, name="home"),
+    path('down/', download_database, name="sqldata"),
     # path('category/<slug:category_slug>/', home, name="filter"),
     path('user/', include("profiles.urls")),
     path('products/', include("products.urls")),

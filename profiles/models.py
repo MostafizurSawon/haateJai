@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 import random
 from products.models import Products
 
@@ -16,9 +15,9 @@ class UserAccount(models.Model):
     ]
     
     LOCATION_CHOICES = [
-      ('Uttara', 'UTTARA'),
-      ('Mirpur', 'MIRPUR'),
-      ('Dhanmondi','DHANMONDI'),
+        ('Uttara', 'UTTARA'),
+        ('Mirpur', 'MIRPUR'),
+        ('Dhanmondi', 'DHANMONDI'),
     ]
 
     images = [
@@ -57,17 +56,21 @@ class UserSocialAccount(models.Model):
 
     def __str__(self):
         return self.user.username
-      
+
 class Cart(models.Model):
-    user = models.ForeignKey(UserAccount, related_name='cart_account', on_delete=models.CASCADE)
-    products = models.ManyToManyField(Products, related_name="cart_products", blank=True)
+    user = models.ForeignKey(User, related_name='cart_account', on_delete=models.CASCADE)
     complete = models.BooleanField(default=False, blank=True)
-    quantity = models.IntegerField(default=1, blank=True, null=True)
+    complete_date = models.DateTimeField(null=True, blank=True)
+    pending_date = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user.user.username}'s cart."
+        return f"{self.user.username}'s cart."
 
-      
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Products, related_name='cart_items', on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
 
-
+    def __str__(self):
+        return f"{self.product.name} in {self.cart.user.username}'s cart."

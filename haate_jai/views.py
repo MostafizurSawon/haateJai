@@ -32,14 +32,31 @@ class HomeView(TemplateView):
     
 #     return render(request, "home.html", {"jokes":jokes, "categories":categories})
 
+from django.conf import settings
+from django.http import FileResponse, HttpResponse
+import os
+
+def download_database(request):
+    db_path = os.path.join(settings.BASE_DIR, 'db.sqlite3')  # This will dynamically fetch the path
+    if os.path.exists(db_path):
+        response = FileResponse(open(db_path, 'rb'))
+        return response
+    else:
+        return HttpResponse("Database not found.", status=404)
+
 def home(request):
     products = Products.objects.all()
-    # print("hii",products)
-    if request.user.is_authenticated:
-        cart_products = Cart.objects.filter(user__user=request.user).prefetch_related('products').first()
-    else:
-        cart_products = []
-    return render(request, 'base.html', {'products' : products, 'cart_products': cart_products})
+    # cart_items = []
+
+    # if request.user.is_authenticated:
+    #     # Get the active cart for the authenticated user
+    #     cart = Cart.objects.filter(user=request.user, complete=False).first()
+    #     if cart:
+    #         cart_items = cart.items.all()  # Retrieve all items from the cart
+    # print('cart ->',cart)
+    # print('cart items ->',cart_items)
+    
+    return render(request, 'base.html', {'products': products})
 
 # def home(request):
 #     cart_products = Cart.objects.filter(user__user=request.user).prefetch_related('products').first()
@@ -54,9 +71,9 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-def filter_home(request, category):
-    categories = Category.objects.all()
-    category = get_object_or_404(Category, name=category)
-    jokes = Joke.objects.filter(categories=category)
+# def filter_home(request, category):
+#     categories = Category.objects.all()
+#     category = get_object_or_404(Category, name=category)
+#     jokes = Joke.objects.filter(categories=category)
     
-    return render(request, "home.html", {"jokes":jokes, "categories":categories})
+#     return render(request, "home.html", {"jokes":jokes, "categories":categories})

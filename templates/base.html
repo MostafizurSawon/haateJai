@@ -194,128 +194,116 @@
 									<div class="tab-single">
 										<div class="row">
 											{% for product in products %}
-											{% comment %} <p> {{ product.category }}</p> {% endcomment %}
-											{% if data.current_location == product.location and product.category|lower == 'vegetables' %}
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a data-target="#{{product.id}}">
-															<img class="default-img" src="{{product.image}}" alt="#">
-															
-															<img class="hover-img" src="{{product.image}}" alt="#">
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#{{product.id}}" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																{% comment %} <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a> {% endcomment %}
-																{% comment %} <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a> {% endcomment %}
-															</div>
-															<div class="product-action-2">
-																{% comment %} <form method="POST" action="{% url 'add_to_cart' product.id %}">
-																	{% csrf_token %}
-																	<input type="number" name="quantity" value="1" min="1" required>
-																	<button type="submit">Add to cart</button>
-																</form> {% endcomment %}
-																<a title="Add to cart" href="{% url 'add_to_cart' product.id %}">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">{{product.name}}</a></h3>
-														<div class="product-price">
-															<span>{{product.price}} ৳</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											{% elif product.category|lower == 'vegetables' %}
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a data-target="#{{product.id}}">
-															<img class="default-img" src="{{product.image}}" alt="#">
-															
-															<img class="hover-img" src="{{product.image}}" alt="#">
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#{{product.id}}" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																{% comment %} <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a> {% endcomment %}
-																{% comment %} <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a> {% endcomment %}
-															</div>
-															<div class="product-action-2">
-																{% comment %} <form method="POST" action="{% url 'add_to_cart' product.id %}">
-																	{% csrf_token %}
-																	<input type="number" name="quantity" value="1" min="1" required>
-																	<button type="submit">Add to cart</button>
-																</form> {% endcomment %}
-																<a title="Add to cart" href="{% url 'add_to_cart' product.id %}">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">{{product.name}}</a></h3>
-														<div class="product-price">
-															<span>{{product.price}} ৳</span>
-														</div>
-													</div>
-												</div>
-											</div>
-											{% endif %}
+    {% if data.current_location == product.location and product.category|lower == 'vegetables' %}
+    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+        <div class="single-product">
+            <div class="product-img">
+                <a data-target="#{{ product.id }}">
+                    <img class="default-img" src="{{ product.image }}" alt="{{ product.name }}">
+                    <img class="hover-img" src="{{ product.image }}" alt="{{ product.name }}">
+                </a>
+                <div class="button-head">
+                    <div class="product-action">
+                        <a data-toggle="modal" data-target="#{{ product.id }}" title="Quick View"><i class="ti-eye"></i><span>Quick Shop</span></a>
+                    </div>
+                    <div class="product-action-2">
+                        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="1" min="1" class="form-control mb-2" required>
+                            <button type="submit" class="btn btn-primary">Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content">
+                <h3><a href="product-details.html">{{ product.name }}</a></h3>
+                <div class="product-price">
+                    <span>{{ product.price }} ৳</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif product.category|lower == 'vegetables' %}
+    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+        <div class="single-product">
+            <div class="product-img">
+                <a data-target="#{{ product.id }}">
+                    <img class="default-img" src="{{ product.image }}" alt="{{ product.name }}">
+                    <img class="hover-img" src="{{ product.image }}" alt="{{ product.name }}">
+                </a>
+                <div class="button-head">
+                    <div class="product-action">
+                        <a data-toggle="modal" data-target="#{{ product.id }}" title="Quick View"><i class="ti-eye"></i><span>Quick Shop</span></a>
+                    </div>
+                    <div class="product-action-2">
+                        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="1" min="1" class="form-control mb-2" required>
+                            <button type="submit" class="btn btn-primary">Add to cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="product-content">
+                <h3><a href="product-details.html">{{ product.name }}</a></h3>
+                <div class="product-price">
+                    <span>{{ product.price }} ৳</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-											<div class="modal fade" id="{{product.id}}" tabindex="-1" role="dialog">
-												<div class="modal-dialog" role="document">
-														<div class="modal-content">
-																<div class="modal-header">
-																		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
-																</div>
-																<div class="modal-body">
-																	<section class="bg-light p-3 p-md-4 p-xl-5">
-																		<div class="container">
-																			<div class="row justify-content-center">
-																				<div class="col-12 col-xxl-11">
-																					<div class="card border-light-subtle shadow-sm">
-																						<div class="row g-0">
-																							<div class="col-12 col-md-6">
-																								<img class="img-fluid rounded-start w-100 h-100 object-fit-cover" loading="lazy" src="{{product.image}}" alt="{{product.name}}">
-																							</div>
-																							<div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
-																								<div class="col-12 col-lg-11 col-xl-10">
-																									<div class="card-body p-3 p-md-4 p-xl-5">
-																										<div class="row">
-																											<div class="col-12">
-																												<h6>Name: {{product.name}}</h6>
-																												<br>
-																												<div class="mb-5">
-																													<h5 class="">Description: {{product.description}}</h5>
-																												</div>
-																											</div>
-																										</div>
-																										<div class="row">
-																											<div class="col-12">
-																												<div class="d-flex gap-3 flex-column">
-																													<h6>Stock: {{product.quantity}}</h6>
-																												</div>
-																												<br>
-																												<h6>Price: {{product.price}}</h6>
-																												<br>
-																												<h6>Sold: {{product.sold}}</h6>
-																											</div>
-																										</div>
-																									</div>
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</section>
-																</div>
-														</div>
-												</div>
-								</div>
-											{% endfor %}
+    <!-- Modal for Quick View -->
+    <div class="modal fade" id="{{ product.id }}" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
+                </div>
+                <div class="modal-body">
+                    <section class="bg-light p-3 p-md-4 p-xl-5">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-xxl-11">
+                                    <div class="card border-light-subtle shadow-sm">
+                                        <div class="row g-0">
+                                            <div class="col-12 col-md-6">
+                                                <img class="img-fluid rounded-start w-100 h-100 object-fit-cover" loading="lazy" src="{{ product.image }}" alt="{{ product.name }}">
+                                            </div>
+                                            <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                                                <div class="col-12 col-lg-11 col-xl-10">
+                                                    <div class="card-body p-3 p-md-4 p-xl-5">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <h6>Name: {{ product.name }}</h6>
+                                                                <div class="mb-5">
+                                                                    <h5>Description: {{ product.description }}</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <h6>Stock: {{ product.quantity }}</h6>
+                                                                <h6>Price: {{ product.price }} ৳</h6>
+                                                                <h6>Sold: {{ product.sold }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
 											
 										</div>
 									</div>

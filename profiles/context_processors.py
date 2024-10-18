@@ -22,20 +22,30 @@ def user_data(request):
             )
             
             cart, created = Cart.objects.get_or_create(
-                user=user_account
+                user=request.user
             )
-            cart_items = cart.products.all()
-            total_price = sum(product.price for product in cart_items)
+            
+            cart = Cart.objects.filter(user=request.user, complete=False).first()
+            if cart:
+                cart_items = cart.items.all()  # Retrieve all items from the cart
+            
+            # cart_items = Cart.objects.filter(user=request.user, complete=False)
+            
+            # Calculate the total price (sum of product prices multiplied by their quantities)
+            # total_price = sum(cart_item.product.price * cart_item.quantity for cart_item in cart_items)
             # print(total_price)
             
             # print(cart.created_at)
             # Add these objects to the context so they can be used in templates
+            # print("context", cart_items)
             return {
                 'data': user_account,
                 'user_social_account': user_social_account,
                 'cart': cart,
-                'total': total_price,
+                'cart_items': cart_items,
+                # 'total': total_price,
             }
+        
 
         except (UserAccount.DoesNotExist, UserSocialAccount.DoesNotExist, Cart.DoesNotExist):
             # If any of the objects don't exist or creation fails, return an empty context
