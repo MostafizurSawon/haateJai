@@ -1,5 +1,4 @@
 from .models import UserAccount, UserSocialAccount, Cart
-# from Tasks.models import Task
 from django.shortcuts import get_object_or_404
 from django.db import IntegrityError
 import random
@@ -21,31 +20,26 @@ def user_data(request):
                 user=request.user
             )
             
+            # Get or create the active cart
             cart, created = Cart.objects.get_or_create(
-                user=request.user
+                user=request.user,
+                defaults={'complete': False}  # Initialize the cart as incomplete if created
             )
+
+            # Retrieve cart items safely, default to an empty list if the cart is empty
+            cart_items = cart.items.all() if cart.complete is False else []
+
+            # Calculate total price only if cart_items are available
+            total_price = sum(cart_item.product.price * cart_item.quantity for cart_item in cart_items) if cart_items else 0
             
-            cart = Cart.objects.filter(user=request.user, complete=False).first()
-            if cart:
-                cart_items = cart.items.all()  # Retrieve all items from the cart
-            
-            # cart_items = Cart.objects.filter(user=request.user, complete=False)
-            
-            # Calculate the total price (sum of product prices multiplied by their quantities)
-            # total_price = sum(cart_item.product.price * cart_item.quantity for cart_item in cart_items)
-            # print(total_price)
-            
-            # print(cart.created_at)
             # Add these objects to the context so they can be used in templates
-            # print("context", cart_items)
             return {
                 'data': user_account,
                 'user_social_account': user_social_account,
                 'cart': cart,
                 'cart_items': cart_items,
-                # 'total': total_price,
+                'total': total_price,
             }
-        
 
         except (UserAccount.DoesNotExist, UserSocialAccount.DoesNotExist, Cart.DoesNotExist):
             # If any of the objects don't exist or creation fails, return an empty context

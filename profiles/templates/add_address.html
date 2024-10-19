@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>Add Address</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save Address</button>
+        <button type="submit" class="btn"><a class="my-3" href="{% url 'checkout' %}" class="text-danger">Cancel</a></button>
+    </form>
+     <!-- Link back to the cart -->
+</div>
+{% endblock %}

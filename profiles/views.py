@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 from django.shortcuts import redirect,get_object_or_404, render
 from .forms import UserRegistrationForm
@@ -9,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
 # from jokes.models import Joke
-from . models import CartItem, UserAccount, Cart
+from . models import CartItem, OrderItem, Orders, UserAccount, Cart
 from products.models import Products
 
 from django.contrib.auth.tokens import default_token_generator
@@ -94,7 +95,14 @@ def profile(request):
     # user_profile = UserAccount.objects.filter(user=user).first()
     user_profile = UserAccount.objects.filter(user=user)
     # print(user_profile.points)
-    return render(request, 'profile.html', {'user_profile': user_profile})
+    orders = Orders.objects.filter(user=request.user)
+
+    # Pass the orders to the template
+    context = {
+        'orders': orders,
+        'user_profile': user_profile
+    }
+    return render(request, 'profile.html', context)
 
 @login_required(login_url=reverse_lazy('login'))
 def checkout(request):
@@ -134,12 +142,86 @@ def add_to_cart(request, product_id):
 @login_required
 def remove_from_cart(request, product_id):
     product = get_object_or_404(Products, id=product_id)
-    user_account = UserAccount.objects.get(user=request.user)
     
-    cart, created = Cart.objects.get_or_create(user=user_account)
+    # Get the user's cart
+    cart, created = Cart.objects.get_or_create(user=request.user)
+
+    # Check if the product exists in the cart
+    cart_item = CartItem.objects.filter(cart=cart, product=product).first()
+
+    if cart_item:
+        # If the product is in the cart, remove the item
+        cart_item.delete()
     
-    if cart.products.filter(id=product.id).exists():
-        cart.products.remove(product)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+from .forms import AddressForm  # Assuming you have a form to handle address input
+
+@login_required
+def add_address(request):
+    user_account = get_object_or_404(UserAccount, user=request.user)
+
+    if request.method == 'POST':
+        form = AddressForm(request.POST, instance=user_account)
+        if form.is_valid():
+            form.save()
+            return redirect('checkout')  # Redirect to the cart or any other page after saving
+    else:
+        form = AddressForm(instance=user_account)  # Load the current user's address if any
+
+    return render(request, 'add_address.html', {'form': form})
+
+# @login_required
+# def update_cart_item_quantity(request, cart_item_id):
+#     cart_item = get_object_or_404(CartItem, id=cart_item_id, cart__user=request.user)
+#     print("foing1")
+#     if request.method == 'POST':
+#         action = request.POST.get('action')
+#         print("foing2")
+#         if action == 'increase':
+#             print("foing")
+#             cart_item.quantity += 1
+#         elif action == 'decrease' and cart_item.quantity > 1:
+#             cart_item.quantity -= 1
+        
+#         cart_item.save()
     
-    return redirect('checkout')
+#     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required
+def place_order(request):
+    # Fetch the user's active cart
+    cart = get_object_or_404(Cart, user=request.user, complete=False)
+    
+    # Calculate the total amount from cart items
+    total_amount = sum(item.product.price * item.quantity for item in cart.items.all())
+
+    # Create the order with the total amount
+    order = Orders.objects.create(user=request.user, total_amount=total_amount)
+
+    # Create OrderItems for each item in the cart
+    for item in cart.items.all():
+        OrderItem.objects.create(order=order, product=item.product, quantity=item.quantity, price=item.product.price)
+
+    # Clear the cart items
+    cart.items.all().delete()
+    cart.save()
+
+    # Redirect to a confirmation page or wherever you want
+    return redirect('profile')
+
+from .models import Orders, OrderItem
+
+
+
+@login_required
+def order_details(request, order_id):
+    order = get_object_or_404(Orders, id=order_id, user=request.user)  # Ensure the order belongs to the logged-in user
+    order_items = order.order_items.all()  # Use the related name to get order items
+
+    context = {
+        'order': order,
+        'items': order_items,
+    }
+    return render(request, 'order_details.html', context)
 

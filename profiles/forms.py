@@ -46,3 +46,8 @@ class UserProfileForm(forms.ModelForm):
             'age': 'Age',
             'description': 'Short Description',
         }
+        
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = UserAccount
+        fields = ['address'] 
