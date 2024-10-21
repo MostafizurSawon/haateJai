@@ -4988,3 +4988,8 @@ Version:1.0
 	End Footer CSS
 ===============================*/
 
+.navbar {
+	width: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}

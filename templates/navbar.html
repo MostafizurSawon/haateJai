@@ -82,46 +82,46 @@
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-3 col-12">
-						<div class="right-bar">
+						<div class="right-bar d-flex align-items-center">
 							<!-- Search Form -->
-							<div class="sinlge-bar">
-								<a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+							<div class="sinlge-bar d-none d-md-block">
+									<a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
 							</div>
-							<div class="sinlge-bar">
-								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+							<div class="sinlge-bar d-none d-md-block">
+									<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 							</div>
 							<div class="sinlge-bar shopping">
-								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{ cart_items.all|length }}</span></a>
-								<!-- Shopping Item -->
-								<div class="shopping-item">
-									<div class="dropdown-cart-header">
-										<span>{{ cart_items.all|length }} Items</span>
-
-										<a href="{% url 'checkout' %}">View Cart</a>
+									<a href="#" class="single-icon"><i class="ti-bag"></i> 
+											<span class="total-count">{{ cart_items.all|length }}</span>
+									</a>
+									<!-- Shopping Item -->
+									<div class="shopping-item">
+											<div class="dropdown-cart-header">
+													<span>{{ cart_items.all|length }} Items</span>
+													<a href="{% url 'checkout' %}">View Cart</a>
+											</div>
+											<ul class="shopping-list">
+													{% for cart_item in cart_items.all %}
+													<li>
+															<a href="{% url 'remove_from_cart' cart_item.product.id %}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+															<a class="cart-img" href="#"><img src="{{ cart_item.product.image }}" alt="{{ cart_item.product.name }}"></a>
+															<h4><a href="#">{{ cart_item.product.name }}</a></h4>
+															<p class="quantity">{{ cart_item.quantity }}x - <span class="amount">{{ cart_item.product.price }} ৳</span></p>
+													</li>
+													{% endfor %}
+											</ul>
+											<div class="bottom">
+													<div class="total">
+															<span>Total</span>
+															<span class="total-amount">{{ total }} ৳</span>
+													</div>
+													<a href="{% url 'checkout' %}" class="btn animate">Checkout</a>
+											</div>
 									</div>
-									<ul class="shopping-list">
-										{% for cart_item in cart_items.all %}
-										<li>
-												<a href="{% url 'remove_from_cart' cart_item.product.id %}" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
-												<a class="cart-img" href="#"><img src="{{ cart_item.product.image }}" alt="{{ cart_item.product.name }}"></a>
-												<h4><a href="#">{{ cart_item.product.name }}</a></h4>
-												<p class="quantity">{{ cart_item.quantity }}x - <span class="amount">{{ cart_item.product.price }} ৳</span></p>
-										</li>
-										{% endfor %}
-								</ul>
-								
-								<div class="bottom">
-										<div class="total">
-												<span>Total</span>
-												<span class="total-amount">{{ total }} ৳</span>
-										</div>
-										<a href="{% url 'checkout' %}" class="btn animate">Checkout</a>
-								</div>
-								
-								</div>
-								<!--/ End Shopping Item -->
+									<!--/ End Shopping Item -->
 							</div>
-						</div>
+					</div>
+					
 					</div>
 				</div>
 			</div>
