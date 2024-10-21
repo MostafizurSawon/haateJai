@@ -9,7 +9,6 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
-# from jokes.models import Joke
 from . models import CartItem, OrderItem, Orders, UserAccount, Cart
 from products.models import Products
 

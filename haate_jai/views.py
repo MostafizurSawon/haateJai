@@ -46,6 +46,44 @@ def download_database(request):
 
 def home(request):
     products = Products.objects.all()
+    vegs =[]
+    meats =[]
+    fishes =[]
+    fruits =[]
+    types =[]
+    for product in products:
+        if any(cat.name.lower() == 'vegetables' for cat in product.category.all()):
+            # print("1Yes, this product is a vegetable")
+            vegs.append(product)
+        
+    for product in products:
+        if any(cat.name.lower() == 'meat' for cat in product.category.all()):
+            # print("1Yes, this product is a vegetable")
+            meats.append(product)
+            
+    for product in products:
+        if any(cat.name.lower() == 'fish' for cat in product.category.all()):
+            # print("1Yes, this product is a vegetable")
+            fishes.append(product)
+            
+    for product in products:   
+        if any(cat.name.lower() == 'fruits' for cat in product.category.all()):
+            # print("1Yes, this product is a vegetable")
+            fruits.append(product)
+            
+    for product in products:   
+        if any(cat.name.lower() == 'hot' for cat in product.type.all()):
+            # print("1Yes, this product is a vegetable")
+            types.append(product)
+        
+
+    # for product in products:
+    #     # Check if any category's name is 'vegetables' (case insensitive)
+    #     if any(cat.name.lower() == 'vegetables' for cat in product.category.all()) and any(loc.name.lower() == 'uttara' for loc in product.location.all()):
+    #         print("1Yes, this product is a vegetable")
+    #     else:
+    #         print("No vegetables in this product")
+
     # cart_items = []
 
     # if request.user.is_authenticated:
@@ -55,8 +93,17 @@ def home(request):
     #         cart_items = cart.items.all()  # Retrieve all items from the cart
     # print('cart ->',cart)
     # print('cart items ->',cart_items)
-    
-    return render(request, 'base.html', {'products': products})
+    # print(vegs)
+    context = {
+        'products': products,
+        'vegs': vegs,
+        'meats': meats,
+        'fishes': fishes,
+        'fruits': fruits,
+        'types': types,
+    }
+    print(context)
+    return render(request, 'base.html', context)
 
 # def home(request):
 #     cart_products = Cart.objects.filter(user__user=request.user).prefetch_related('products').first()

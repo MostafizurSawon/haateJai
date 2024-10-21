@@ -22,7 +22,11 @@
 						<!-- Top Right -->
 						<div class="right-content">
 							<ul class="list-main">
+								{% if data.current_location %}
 								<li><i class="ti-location-pin"></i> {{data.current_location}}</li> 
+								{% else %}
+								<li><i class="ti-location-pin"></i> Uttara</li>
+								{% endif %}
 								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
 
 								<li><i class="ti-user"></i> <a href="{% url 'profile' %}">My account</a></li>
