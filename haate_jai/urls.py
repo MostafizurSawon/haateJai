@@ -27,7 +27,7 @@ urlpatterns = [
     path('', home, name="home"),
     path('down/', download_database, name="sqldata"),
     # path('category/<slug:category_slug>/', home, name="filter"),
-    path('user/', include("profiles.urls")),
+    path('accounts/', include("profiles.urls")),
     path('products/', include("products.urls")),
     # path('reviews/', include("reviews.urls")),
     # path('about-us/', about, name="about"),

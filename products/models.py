@@ -35,11 +35,11 @@ class Products(models.Model):
       ('Offer', 'Offer'),
   ]
   
-  LOCATION_CHOICES = [
-      ('Uttara', 'UTTARA'),
-      ('Mirpur', 'MIRPUR'),
-      ('Dhanmondi','DHANMONDI'),
-  ]
+  # LOCATION_CHOICES = [
+  #     ('Uttara', 'UTTARA'),
+  #     ('Mirpur', 'MIRPUR'),
+  #     ('Dhanmondi','DHANMONDI'),
+  # ]
   
   name = models.CharField(max_length=100)
   image = models.URLField(blank=True, null=True)

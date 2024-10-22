@@ -35,7 +35,7 @@ class UserRegistrationView(FormView):
         print("uid ", uid)
 
         # sometimes working sometimes not working the verification email link
-        confirm_link = f"https://haatejai.onrender.com/user/activate/{uid}/{token}/"
+        confirm_link = f"https://haatejai.onrender.com/accounts/activate/{uid}/{token}/"
         # confirm_link = f"http://127.0.0.1:8000/user/activate/{uid}/{token}/"
         email_subject = "Confirm Your Email"
         email_body = render_to_string('confirm_email.html', {'confirm_link' : confirm_link})

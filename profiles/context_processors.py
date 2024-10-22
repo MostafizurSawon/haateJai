@@ -50,4 +50,4 @@ def user_data(request):
             return {}
 
     # Return empty context if the user is not authenticated
-    return {}
+    return {'data': 'uttara'}

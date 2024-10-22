@@ -115,7 +115,7 @@
 						<div class="content">
 							<p>Meat Collectons</p>
 							<h3>Protein <br> deals</h3>
-							<a href="#">Discover Now</a>
+							<a href="#trend">Discover Now</a>
 						</div>
 					</div>
 				</div>
@@ -127,7 +127,7 @@
 						<div class="content">
 							<p>Vegetables</p>
 							<h3>Vegetables <br> Deals</h3>
-							<a href="#">Shop Now</a>
+							<a href="#vegetables">Shop Now</a>
 						</div>
 					</div>
 				</div>
@@ -139,7 +139,7 @@
 						<div class="content">
 							<p>Flash Sale</p>
 							<h3>Mid Season <br> Up to <span>50%</span> Off</h3>
-							<a href="#">Discover Now</a>
+							<a href="#trend">Discover Now</a>
 						</div>
 					</div>
 				</div>
@@ -168,7 +168,7 @@
             <div class="container">
 				<div class="row">
 					<div class="col-12">
-						<div class="section-title">
+						<div id="trend" class="section-title">
 							<h2>Trending Item</h2>
 						</div>
 					</div>
@@ -196,7 +196,7 @@
 											{% for product in vegs %}
 											{% for loc in product.location.all %}
 											
-											{% if data.current_location|lower == loc|lower %}
+											{% if data.current_location|lower == loc|lower or data == loc|lower %}
 											
 
 											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
@@ -227,38 +227,7 @@
 															</div>
 													</div>
 											</div>
-											{% comment %} {% elif product.category|lower == 'vegetables' %}
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-													<div class="single-product">
-															<div class="product-img">
-																	<a data-target="#{{ product.id }}">
-																			<img class="default-img" src="{{ product.image }}" alt="{{ product.name }}">
-																			<img class="hover-img" src="{{ product.image }}" alt="{{ product.name }}">
-																	</a>
-																	<div class="button-head">
-																			<div class="product-action">
-																					<a data-toggle="modal" data-target="#{{ product.id }}" title="Quick View"><i class="ti-eye"></i><span>Quick Shop</span></a>
-																			</div>
-																			<div class="product-action-2">
-																					<form method="POST" action="{% url 'add_to_cart' product.id %}">
-																							{% csrf_token %}
-																							<div data-mdb-input-init class="form-outline w-25 m-2 d-flex justify-content-center">
-																								<input value="1" min="1" name="quantity" type="number" id="typeNumber" class="form-control" required />
-																								
-																							</div>
-																							<button type="submit" class="btn btn-primary">Add to cart</button>
-																					</form>
-																			</div>
-																	</div>
-															</div>
-															<div class="product-content">
-																	<h3><a href="product-details.html">{{ product.name }}</a></h3>
-																	<div class="product-price">
-																			<span>{{ product.price }} ৳</span>
-																	</div>
-															</div>
-													</div>
-											</div> {% endcomment %}
+											
 											{% endif %}
 
     <!-- Modal for Quick View -->
@@ -325,7 +294,7 @@
 											{% for product in meats %}
 											{% for loc in product.location.all %}
 											
-											{% if data.current_location|lower == loc|lower %}
+											{% if data.current_location|lower == loc|lower or data == loc|lower%}
 											
 
 											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
@@ -453,7 +422,7 @@
 											{% for product in fishes %}
 											{% for loc in product.location.all %}
 											
-											{% if data.current_location|lower == loc|lower %}
+											{% if data.current_location|lower == loc|lower or data == loc|lower%}
 											
 
 											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
@@ -581,7 +550,7 @@
 											{% for product in fruits %}
 											{% for loc in product.location.all %}
 											
-											{% if data.current_location|lower == loc|lower %}
+											{% if data.current_location|lower == loc|lower or data == loc|lower%}
 											
 
 											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
@@ -1186,20 +1155,21 @@
 	<!-- Start Most Popular -->
 	<div class="product-area most-popular section">
         <div class="container">
-            <div class="row">
-				<div class="col-12">
-					<div class="section-title">
-						<h2>Hot Item</h2>
-					</div>
-				</div>
-            </div>
+					<div class="row">
+						<div class="col-12">
+							<div class="section-title">
+								<h2>Hot Item</h2>
+							</div>
+						</div>
+        	</div>
             <div class="row">
                 <div class="col-12">
                     <div class="owl-carousel popular-slider">
+										{% comment %} -->{{data}} {% endcomment %}
 											{% for product in types %}
 											{% for loc in product.location.all %}
 											
-											{% if data.current_location|lower == loc|lower %}
+											{% if data.current_location|lower == loc|lower or data == loc|lower %}
 						<!-- Start Single Product -->
 						<div class="single-product">
 							<div class="product-img">
@@ -1209,13 +1179,17 @@
 									<span class="out-of-stock">Hot</span>
 								</a>
 								<div class="button-head">
-									<div class="product-action">
+									{% comment %} <div class="product-action">
 										<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
 										<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
 										<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-									</div>
+									</div> {% endcomment %}
 									<div class="product-action-2">
-										<a title="Add to cart" href="#">Add to cart</a>
+										<form method="POST" action="{% url 'add_to_cart' product.id %}">
+											{% csrf_token %}
+											<input type="number" name="quantity" value="1" min="1" class="form-control mb-2" required>
+											<button type="submit" class="btn btn-primary">Add to cart</button>
+									</form>
 									</div>
 								</div>
 							</div>
@@ -1237,30 +1211,14 @@
         </div>
     </div>
 	<!-- End Most Popular Area -->
-	
-	<section class="section free-version-banner">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8 offset-md-2 col-xs-12">
-                    <div class="section-title mb-60">
-                        <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">Eshop Free Lite version</span>
-                        <h2 class="text-white wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Currently You are using free<br> lite Version of Eshop.</h2>
-                        <p class="text-white wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">Please, purchase full version of the template to get all pages,<br> features and commercial license.</p>
-
-                        <div class="button">
-                            <a href="https://wpthemesgrid.com/downloads/eshop-ecommerce-html5-template/" target="_blank" rel="nofollow" class="btn wow fadeInUp" data-wow-delay=".8s">Purchase Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-	
+	<div class="my-5"><hr></div>
 	<!-- Start Shop Home List  -->
+
+	
 	<section class="shop-home-list section">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-6 col-12">
+				<div class=" col-12">
 					<div class="row">
 						<div class="col-12">
 							<div class="shop-section-title">
@@ -1268,194 +1226,62 @@
 							</div>
 						</div>
 					</div>
-					<!-- Start Single List  -->
-					<div class="single-list">
+					
+						
+
+					<div class="row d-flex justify-content-center">
+	
+
+						{% for product in offers %}
+						{% for loc in product.location.all %}
+						
+						{% if data.current_location|lower == loc|lower or data == loc|lower %}
+						<!-- Start Single List  -->
+					<div class="m-3 single-list col-lg-5 col-md-5 col-12">
+						<!-- Start Single Product -->
 						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h4 class="title"><a href="#">Licity jelly leg flat Sandals</a></h4>
-									<p class="price with-discount">$59</p>
-								</div>
+						<div class="col-lg-4 col-md-6 col-12">
+								
+							<div class="list-image overlay">
+								<img src="{{product.image}}" alt="#">
+								<a href="{% url 'add_to_cart' product.id %}" class="buy"><i class="fa fa-shopping-bag"></i></a>
 							</div>
 						</div>
-					</div>
-					<!-- End Single List  -->
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$44</p>
-								</div>
+						<div class="col-lg-6 col-md-6 col-12 no-padding">
+							<div class="content">
+								<h6 class="title">{{product.name}}</h6>
+								<br>
+								<p class="price with-discount"><del>{{product.price}} ৳</del> {{product.discount_price}} ৳</p>
+								
 							</div>
 						</div>
+					
+
+
 					</div>
-					<!-- End Single List  -->
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$89</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Single List  -->
 				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="row">
-						<div class="col-12">
-							<div class="shop-section-title">
-								<h1>Best Seller</h1>
-							</div>
+						<!-- End Single Product -->
+						 {% endif %}
+						 {% endfor %}
+						 {% endfor %}
 						</div>
-					</div>
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$65</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Single List  -->
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$33</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Single List  -->
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$77</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Single List  -->
+						
+					
+
+
+
+							
+							
 				</div>
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="row">
-						<div class="col-12">
-							<div class="shop-section-title">
-								<h1>Top viewed</h1>
-							</div>
-						</div>
-					</div>
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$22</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Single List  -->
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$35</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Single List  -->
-					<!-- Start Single List  -->
-					<div class="single-list">
-						<div class="row">
-							<div class="col-lg-6 col-md-6 col-12">
-								<div class="list-image overlay">
-									<img src="https://via.placeholder.com/115x140" alt="#">
-									<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
-								</div>
-							</div>
-							<div class="col-lg-6 col-md-6 col-12 no-padding">
-								<div class="content">
-									<h5 class="title"><a href="#">Licity jelly leg flat Sandals</a></h5>
-									<p class="price with-discount">$99</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End Single List  -->
-				</div>
+				
+				
 			</div>
 		</div>
 	</section>
 	<!-- End Shop Home List  -->
 	
 	<!-- Start Shop Blog  -->
-	<section class="shop-blog section">
+	{% comment %} <section class="shop-blog section">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -1503,7 +1329,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> {% endcomment %}
 	<!-- End Shop Blog  -->
 	
 	<!-- Start Shop Services Area -->

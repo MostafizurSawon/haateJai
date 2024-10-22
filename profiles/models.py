@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 import random
 from products.models import Products
 
+# class UserLocation(models.Model):
+#     name = models.CharField(max_length=20, blank=True, null=True)
+#     delete = models.BooleanField(default=False)
+    
+#     def __str__(self):
+#         return self.name
+
 class UserAccount(models.Model):
     GENDER_CHOICES = [
         ('Male', 'Male'),
@@ -39,6 +46,8 @@ class UserAccount(models.Model):
     age = models.IntegerField(null=True, blank=True)
     hometown = models.CharField(max_length=20)
     address = models.TextField(blank=True)
+    # current_location = models.ForeignKey(UserLocation, related_name='user_location_account', on_delete=models.SET_NULL, null=True, blank=True)
+
     current_location = models.CharField(max_length=20, blank=True, choices=LOCATION_CHOICES, default="UTTARA")
     description = models.TextField(blank=True)
 

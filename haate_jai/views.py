@@ -51,6 +51,7 @@ def home(request):
     fishes =[]
     fruits =[]
     types =[]
+    offers =[]
     for product in products:
         if any(cat.name.lower() == 'vegetables' for cat in product.category.all()):
             # print("1Yes, this product is a vegetable")
@@ -75,6 +76,11 @@ def home(request):
         if any(cat.name.lower() == 'hot' for cat in product.type.all()):
             # print("1Yes, this product is a vegetable")
             types.append(product)
+            
+    for product in products:   
+        if any(cat.name.lower() == 'offer' for cat in product.type.all()):
+            # print("1Yes, this product is a vegetable")
+            offers.append(product)
         
 
     # for product in products:
@@ -101,8 +107,9 @@ def home(request):
         'fishes': fishes,
         'fruits': fruits,
         'types': types,
+        'offers': offers,
     }
-    print(context)
+    # print(context)
     return render(request, 'base.html', context)
 
 # def home(request):
